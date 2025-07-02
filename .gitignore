@@ -1,0 +1,30 @@
+# Python cache files and artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environments
+.venv
+venv/
+env/
+
+# IDE and editor specific files
+.vscode/
+.idea/
+
+# OS-generated files (for Mac, Windows, Linux)
+.DS_Store
+Thumbs.db
+
+# Log and temporary files from our project
+/logs/
+/temp_saves/
+*.log
+
+# --- Project Specific Data ---
+# Ignore the entire data folder which contains large JSON files,
+# parameters, and all book cover images.
+# This data will be uploaded directly to the deployment server (Hugging Face Spaces)
+# but should not be part of the Git history.
+/data/
