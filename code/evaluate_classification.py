@@ -1,11 +1,9 @@
-# development_scripts/evaluate_classification.py
 import pandas as pd
 import json
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-# Adjust the path to read from the correct data folder
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 CLASSIFIED_BOOKS_PATH = os.path.join(DATA_DIR, "classified_books.json")
 
