@@ -1,9 +1,10 @@
 ---
-title: BookWise API
-emoji: 📘
-colorFrom: indigo
-colorTo: blue
+title: Book Recommendation
+emoji: 📈
+colorFrom: purple
+colorTo: yellow
 sdk: docker
-app_file: Dockerfile
 pinned: false
 ---
+
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
