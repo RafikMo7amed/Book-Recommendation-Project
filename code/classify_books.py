@@ -49,7 +49,7 @@ def save_classified_data(df, output_file):
         logger.error(f"Error saving final file: {e}")
 
 def clean_text_for_classification(text):
-    """Clean text before classification."""
+    """Cleanning text before classification."""
     if not isinstance(text, str) or not text.strip():
         return ""
     text = BeautifulSoup(text, "html.parser").get_text()
@@ -71,7 +71,6 @@ def classify_books(json_data, candidate_labels, batch_size=8, max_length=512, sa
         logger.info("Using CPU for classification.")
 
     try:
-        # **IMPROVEMENT**: Using a more powerful and recent model for better accuracy.
         model_name = "facebook/bart-large-mnli"
         classifier = pipeline(
             "zero-shot-classification",
@@ -142,7 +141,7 @@ def classify_books(json_data, candidate_labels, batch_size=8, max_length=512, sa
             except Exception as e:
                 logger.error(f"Error classifying a chunk for book '{row['title']}': {e}")
         
-        # **IMPROVEMENT**: Aggregate scores using mean instead of max for robustness
+        
         aggregated_scores = {label: 0.0 for label in candidate_labels}
         for label, scores in chunk_scores.items():
             if scores:
@@ -162,13 +161,10 @@ def classify_books(json_data, candidate_labels, batch_size=8, max_length=512, sa
 
     return df
 
-# Example usage
 if __name__ == "__main__":
     input_file = "D:\\Graduation Project\\project\\data\\enriched_books_only_covers.json"
     output_file = "D:\\Graduation Project\\project\\data\\classified_books.json"
     
-    # The quality of these labels is CRITICAL for the success of the project.
-    # Spend time refining them. Make them distinct and comprehensive.
     candidate_labels = [
         "Personal Development", "Career Success", "Strengthening Relationships",
         "Habit Improvement", "Productivity Enhancement", "Building Self-Confidence",

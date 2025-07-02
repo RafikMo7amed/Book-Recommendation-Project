@@ -1,4 +1,3 @@
-# api/recommendation_logic.py
 import pandas as pd
 
 from . import config
@@ -15,7 +14,7 @@ def get_for_you_recommendations(df: pd.DataFrame, preferences: dict) -> pd.DataF
         lambda scores: sum(scores.get(label, 0) for label in user_labels) / len(user_labels) if user_labels else 0
     )
     
-    # You can add a diversity algorithm here later if you want
+   
     final_books = df.sort_values(by='relevance_score', ascending=False).head(config.N_RECOMMENDATIONS)
     return final_books
 
