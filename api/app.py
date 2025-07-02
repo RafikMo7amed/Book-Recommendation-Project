@@ -1,4 +1,3 @@
-# api/app.py
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 import pandas as pd
@@ -30,7 +29,7 @@ def load_all():
     state['summarizer'] = SummarizationModelHandler()
     logger.info("Startup complete.")
 
-# Pydantic models for request validation
+
 class UserPreferences(BaseModel):
     goals: List[str] = []; skills: List[str] = []; content_types: List[str] = []; habit_building: bool = False
 
