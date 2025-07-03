@@ -6,6 +6,9 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 # Copy the new top-level app.py
 COPY ./app.py /app/app.py
 
+# Create and set permissions for the model cache directory
+RUN mkdir -p /app/model_cache && chmod 777 /app/model_cache
+
 # Copy both the api code and the necessary data
 COPY ./api /app/api
 COPY ./data /app/data
