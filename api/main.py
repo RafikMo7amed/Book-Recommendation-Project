@@ -4,6 +4,7 @@ import pandas as pd
 import json
 import logging
 from typing import List
+import traceback
 
 from . import config
 from .summarization_model_handler import SummarizationModelHandler
