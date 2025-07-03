@@ -1,6 +1,6 @@
 import pandas as pd
 
-from . import config
+from api import config
 def get_for_you_recommendations(df: pd.DataFrame, preferences: dict) -> pd.DataFrame:
     """Gets personalized recommendations based on user preferences."""
     user_labels = set(preferences.get('goals', []) + preferences.get('skills', []) + preferences.get('content_types', []))

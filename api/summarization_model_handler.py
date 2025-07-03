@@ -2,7 +2,7 @@ import torch
 from transformers import pipeline, AutoTokenizer
 import logging
 
-from . import config
+from api import config
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
