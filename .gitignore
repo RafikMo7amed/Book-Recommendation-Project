@@ -27,4 +27,4 @@ Thumbs.db
 # parameters, and all book cover images.
 # This data will be uploaded directly to the deployment server (Hugging Face Spaces)
 # but should not be part of the Git history.
-/data/
+#/data/
