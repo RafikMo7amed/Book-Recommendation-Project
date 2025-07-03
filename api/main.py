@@ -69,23 +69,20 @@ def get_summary_endpoint(request: SummarizationRequest):
     except KeyError:
         raise HTTPException(404, "Book ID not found.")
 
-    # -- بداية الجزء الذي سنقوم بتصحيحه --
     try:
         reading_time_map = {'5 minutes': 0.3, '10 minutes': 0.5, '15\+ minutes': 0.7}
         ratio = reading_time_map.get(request.reading_time)
         
-        # هذا السطر هو الذي يسبب المشكلة غالبًا
         summary = summarizer.summarize_text(content, params=best_params, ratio=ratio)
         
         if "Error" in summary:
-            # في حالة أن دالة التلخيص ترجع خطأ نصيًا
             print(f"--- Summarizer Function Returned an Error: {summary} ---")
             raise HTTPException(500, "Failed to generate summary.")
             
         return {"book_id": request.book_id, "summary": summary}
 
     except Exception as e:
-        # هذا الجزء سيمسك أي عطل غير متوقع ويطبعه
+        
         print("--- UNEXPECTED ERROR TRACEBACK ---")
         print(traceback.format_exc())
         print("----------------------------------")
