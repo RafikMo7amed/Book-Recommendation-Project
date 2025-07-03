@@ -1,8 +1,0 @@
-fastapi
-uvicorn[standard]
-pandas
-torch
-transformers
-sentencepiece
-protobuf
-python-multipart
