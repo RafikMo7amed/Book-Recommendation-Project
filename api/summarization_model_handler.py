@@ -1,11 +1,12 @@
+import os
 import torch
 from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 import logging
 
-from . import config
-import os
-os.environ['HUGGING_FACE_HUB_CACHE'] = '/app/cache'
+os.environ['HF_HOME'] = '/app/hf_cache'
+os.environ['TRANSFORMERS_CACHE'] = '/app/hf_cache'
 
+from . import config
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -24,10 +25,9 @@ class SummarizationModelHandler:
         try:
             device = 0 if torch.cuda.is_available() else -1
             model_name = "google/pegasus-large"
-            cache_path = "/app/model_cache"
             
-            self.tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_path)
-            model = AutoModelForSeq2SeqLM.from_pretrained(model_name, cache_dir=cache_path)
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+            model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
             
             self.summarizer_pipeline = pipeline(
                 "summarization",

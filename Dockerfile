@@ -4,7 +4,7 @@ WORKDIR /app
 COPY ./requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
-RUN mkdir -p /app/cache && chmod -R 777 /app/cache
+RUN mkdir -p /app/hf_cache && chmod -R 777 /app/hf_cache
 
 COPY ./app.py /app/app.py
 COPY ./api /app/api
