@@ -3,6 +3,9 @@ from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 import logging
 
 from . import config
+import os
+os.environ['HUGGING_FACE_HUB_CACHE'] = '/app/cache'
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 

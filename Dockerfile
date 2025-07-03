@@ -1,17 +1,16 @@
 FROM python:3.11-slim
 WORKDIR /app
+
 COPY ./requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
-# Copy the new top-level app.py
+# إنشاء مجلد الكاش مع إعطائه الصلاحيات اللازمة
+RUN mkdir -p /app/cache && chmod -R 777 /app/cache
+
+# نسخ ملفات التطبيق
 COPY ./app.py /app/app.py
-
-# Create and set permissions for the model cache directory
-RUN mkdir -p /app/model_cache && chmod 777 /app/model_cache
-
-# Copy both the api code and the necessary data
 COPY ./api /app/api
 COPY ./data /app/data
 
-# The command to run the API server
+# تشغيل التطبيق
 CMD ["python", "app.py"]
