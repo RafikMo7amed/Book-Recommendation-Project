@@ -57,14 +57,36 @@ def get_for_you_endpoint(preferences: UserPreferences):
 
 @app.post("/summary", summary="Get an on-demand summary for a single book")
 def get_summary_endpoint(request: SummarizationRequest):
-    df = state.get('df_classified'); summarizer = state.get('summarizer'); best_params = state.get('best_summary_params')
-    if df is None or summarizer is None: raise HTTPException(503, "Service not ready.")
+    df = state.get('df_classified')
+    summarizer = state.get('summarizer')
+    best_params = state.get('best_summary_params')
+
+    if df is None or summarizer is None:
+        raise HTTPException(503, "Service not ready.")
+
     try:
         content = df.loc[request.book_id, 'content']
     except KeyError:
         raise HTTPException(404, "Book ID not found.")
-    reading_time_map = {'5 minutes': 0.3, '10 minutes': 0.5, '15\+ minutes': 0.7}
-    ratio = reading_time_map.get(request.reading_time)
-    summary = summarizer.summarize_text(content, params=best_params, ratio=ratio)
-    if "Error" in summary: raise HTTPException(500, "Failed to generate summary.")
-    return {"book_id": request.book_id, "summary": summary}
+
+    # -- بداية الجزء الذي سنقوم بتصحيحه --
+    try:
+        reading_time_map = {'5 minutes': 0.3, '10 minutes': 0.5, '15\+ minutes': 0.7}
+        ratio = reading_time_map.get(request.reading_time)
+        
+        # هذا السطر هو الذي يسبب المشكلة غالبًا
+        summary = summarizer.summarize_text(content, params=best_params, ratio=ratio)
+        
+        if "Error" in summary:
+            # في حالة أن دالة التلخيص ترجع خطأ نصيًا
+            print(f"--- Summarizer Function Returned an Error: {summary} ---")
+            raise HTTPException(500, "Failed to generate summary.")
+            
+        return {"book_id": request.book_id, "summary": summary}
+
+    except Exception as e:
+        # هذا الجزء سيمسك أي عطل غير متوقع ويطبعه
+        print("--- UNEXPECTED ERROR TRACEBACK ---")
+        print(traceback.format_exc())
+        print("----------------------------------")
+        raise HTTPException(500, detail="Failed to generate summary due to an internal error.")
