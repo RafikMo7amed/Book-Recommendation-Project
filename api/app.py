@@ -5,9 +5,9 @@ import json
 import logging
 from typing import List
 
-from api import config
-from api.summarization_model_handler import SummarizationModelHandler
-from api import recommendation_logic
+from . import config
+from .summarization_model_handler import SummarizationModelHandler
+from . import recommendation_logic
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
