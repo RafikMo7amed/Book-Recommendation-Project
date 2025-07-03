@@ -3,10 +3,8 @@ import torch
 from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 import logging
 
-os.environ['HF_HOME'] = '/app/hf_cache'
-os.environ['TRANSFORMERS_CACHE'] = '/app/hf_cache'
-
 from . import config
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -24,7 +22,7 @@ class SummarizationModelHandler:
     def _initialize_model(self):
         try:
             device = 0 if torch.cuda.is_available() else -1
-            model_name = "google/pegasus-large"
+            model_name = config.SUMMARIZATION_MODEL
             
             self.tokenizer = AutoTokenizer.from_pretrained(model_name)
             model = AutoModelForSeq2SeqLM.from_pretrained(model_name)

@@ -1,6 +1,9 @@
 FROM python:3.11-slim
 WORKDIR /app
 
+ENV HF_HOME /app/hf_cache
+ENV TRANSFORMERS_CACHE /app/hf_cache
+
 COPY ./requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
