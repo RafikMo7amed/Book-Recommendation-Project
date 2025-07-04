@@ -1,5 +1,4 @@
-FROM pytorch/pytorch:2.3.0-cuda12.1-cudnn8-runtimeWORKDIR /app
-
+FROM pytorch/pytorch:2.3.0-cuda12.1-cudnn8-runtime
 ENV HF_HOME /app/hf_cache
 ENV TRANSFORMERS_CACHE /app/hf_cache
 
