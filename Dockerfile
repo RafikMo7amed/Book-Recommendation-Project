@@ -9,8 +9,7 @@ RUN pip install --no-cache-dir --upgrade -r /workspace/requirements.txt
 
 RUN mkdir -p /workspace/hf_cache && chmod -R 777 /workspace/hf_cache
 
-COPY ./app.py /workspace/app.py
 COPY ./api /workspace/api
 COPY ./data /workspace/data
 
-CMD ["python", "app.py"]
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "7860"]
