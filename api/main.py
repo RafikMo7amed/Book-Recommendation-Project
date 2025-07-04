@@ -71,7 +71,7 @@ def get_summary_endpoint(request: SummarizationRequest):
         raise HTTPException(404, "Book ID not found.")
 
     try:
-        reading_time_map = {'5 minutes': 0.3, '10 minutes': 0.5, '15\+ minutes': 0.7}
+        reading_time_map = {'5 minutes': 0.3, '10 minutes': 0.5, '15+ minutes': 0.7}
         ratio = reading_time_map.get(request.reading_time)
         
         summary = summarizer.summarize_text(content, params=best_params, ratio=ratio)
