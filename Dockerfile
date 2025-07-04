@@ -7,7 +7,7 @@ ENV TRANSFORMERS_CACHE /workspace/hf_cache
 COPY ./requirements.txt /workspace/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /workspace/requirements.txt
 
-RUN pip install --no-cache-dir --upgrade "torch>=2.6.0"
+RUN pip install --no-cache-dir --upgrade torch torchvision torchaudio
 
 RUN mkdir -p /workspace/hf_cache && chmod -R 777 /workspace/hf_cache
 
